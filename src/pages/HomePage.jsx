@@ -2,6 +2,7 @@ import Navbar from '../components/layout/Navbar';
 import HeroSection from '../components/home/HeroSection';
 import CompaniesSection from '../components/home/CompaniesSection';
 import CategorySection from '../components/home/CategorySection';
+import PostJobBannerSection from '../components/home/PostJobBannerSection';
 
 const HomePage = () => {
   return (
@@ -11,6 +12,7 @@ const HomePage = () => {
         <HeroSection />
         <CompaniesSection />
         <CategorySection />
+        <PostJobBannerSection />
       </main>
     </div>
   );
