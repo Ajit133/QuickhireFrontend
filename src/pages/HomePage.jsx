@@ -1,5 +1,6 @@
 import Navbar from '../components/layout/Navbar';
 import HeroSection from '../components/home/HeroSection';
+import CompaniesSection from '../components/home/CompaniesSection';
 
 const HomePage = () => {
   return (
@@ -7,6 +8,7 @@ const HomePage = () => {
       <Navbar />
       <main>
         <HeroSection />
+        <CompaniesSection />
       </main>
     </div>
   );
