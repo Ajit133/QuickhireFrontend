@@ -1,6 +1,7 @@
 import Navbar from '../components/layout/Navbar';
 import HeroSection from '../components/home/HeroSection';
 import CompaniesSection from '../components/home/CompaniesSection';
+import CategorySection from '../components/home/CategorySection';
 
 const HomePage = () => {
   return (
@@ -9,6 +10,7 @@ const HomePage = () => {
       <main>
         <HeroSection />
         <CompaniesSection />
+        <CategorySection />
       </main>
     </div>
   );
