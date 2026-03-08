@@ -4,6 +4,7 @@ import CompaniesSection from '../components/home/CompaniesSection';
 import CategorySection from '../components/home/CategorySection';
 import PostJobBannerSection from '../components/home/PostJobBannerSection';
 import FeaturedJobsSection from '../components/home/FeaturedJobsSection';
+import LatestJobsSection from '../components/home/LatestJobsSection';
 
 const HomePage = () => {
   return (
@@ -15,6 +16,7 @@ const HomePage = () => {
         <CategorySection />
         <PostJobBannerSection />
         <FeaturedJobsSection />
+        <LatestJobsSection />
       </main>
     </div>
   );
