@@ -12,9 +12,9 @@ const BrowseJobsPage = () => {
   const dispatch = useDispatch();
   const { jobs, loading, error, searchKeyword, searchLocation } = useSelector((s) => s.jobs);
 
-  const [search,   setSearch]   = useState(searchKeyword);
+  const [search,   setSearch]   = useState('');
   const [category, setCategory] = useState('');
-  const [location, setLocation] = useState(searchLocation);
+  const [location, setLocation] = useState('');
 
   useEffect(() => {
     dispatch(fetchJobs());

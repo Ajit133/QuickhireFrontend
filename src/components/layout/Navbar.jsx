@@ -11,7 +11,9 @@ const Navbar = () => {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-5 flex items-center justify-between">
         {/* Left: Logo + Nav links */}
         <div className="flex items-center gap-10">
+        <Link to="/" className="flex items-center gap-2 no-underline">
           <Logo />
+          </Link>
           <ul className="hidden md:flex items-center gap-8 list-none m-0 p-0">
             <li>
               <a href="#" className="text-[#515B6F] font-medium hover:text-[#4640DE] transition-colors duration-200 no-underline">

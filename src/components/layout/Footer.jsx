@@ -83,7 +83,7 @@ const Footer = () => {
 
       {/* Bottom bar */}
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="text-gray-400 text-sm">2021 @ QuickHire. All rights reserved.</p>
+        <p className="text-gray-400 text-sm">2026 @ QuickHire. All rights reserved.</p>
         <div className="flex items-center gap-3">
           {/* Facebook */}
           <SocialIcon>
