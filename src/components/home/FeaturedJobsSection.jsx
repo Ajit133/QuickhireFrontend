@@ -18,10 +18,31 @@ const FeaturedJobsSection = () => {
     <section className="w-full bg-[#F8F8FD] py-10 md:py-16 px-4 md:px-6 lg:px-10">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-6 md:mb-10">
+        <div className="flex items-center justify-between mb-6 md:mb-10">
           <h2 className="text-2xl md:text-3xl font-extrabold text-[#25324B]">
             Featured <span className="text-[#26A4FF]">jobs</span>
           </h2>
+          {/* Show all jobs — visible only on desktop */}
+          <Link
+            to="/browse-jobs"
+            className="hidden md:flex items-center gap-2 text-sm font-semibold text-[#4640DE] hover:underline"
+          >
+            Show all jobs
+            <svg
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-4 h-4"
+            >
+              <path
+                d="M4 10h12M11 5l5 5-5 5"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Link>
         </div>
 
         {/* Loading skeleton */}
@@ -74,8 +95,8 @@ const FeaturedJobsSection = () => {
           </>
         )}
 
-        {/* Show all jobs link */}
-        <div className="flex justify-center mt-8">
+        {/* Show all jobs link — visible only on mobile, below the cards */}
+        <div className="flex md:hidden justify-center mt-8">
           <Link
             to="/browse-jobs"
             className="flex items-center gap-2 text-sm font-semibold text-[#4640DE] hover:underline"
