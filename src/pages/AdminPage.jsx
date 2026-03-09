@@ -64,7 +64,7 @@ export default function AdminPage() {
         {/* ── Header ── */}
         <div>
           <h1 className="text-3xl font-bold text-[#25324B]">Admin Dashboard</h1>
-          <p className="text-[#515B6F] mt-1">Manage job listings — add or remove postings.</p>
+          <p className="text-[#515B6F] mt-1">Manage job listings add or remove postings.</p>
         </div>
 
         {/* ── Add Job Form ── */}
