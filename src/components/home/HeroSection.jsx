@@ -23,11 +23,6 @@ const WavyUnderline = () => (
 );
 
 const HeroSection = () => {
-  const handleSearch = ({ keyword, location }) => {
-    // TODO: dispatch Redux action or navigate with search params
-    console.log('Search submitted:', { keyword, location });
-  };
-
   return (
     <section className="relative bg-[#F8F8FD] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-12 lg:py-20 flex flex-col lg:flex-row items-center gap-12 lg:gap-0">
@@ -46,7 +41,7 @@ const HeroSection = () => {
           </p>
 
           <div className="mt-8">
-            <SearchBar onSearch={handleSearch} />
+            <SearchBar />
           </div>
 
           <p className="mt-4 text-sm text-[#515B6F]">

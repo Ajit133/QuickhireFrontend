@@ -1,14 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { fetchJobs, setSearchFilter } from '../../redux/jobsSlice';
 import Button from '../common/Button';
-
-const LOCATIONS = [
-  'Florence, Italy',
-  'New York, USA',
-  'London, UK',
-  'Berlin, Germany',
-  'Tokyo, Japan',
-  'Remote',
-];
 
 const SearchIcon = () => (
   <svg
@@ -42,14 +36,23 @@ const LocationIcon = () => (
   </svg>
 );
 
-const SearchBar = ({ onSearch }) => {
-  const [keyword, setKeyword] = useState('');
-  const [location, setLocation] = useState(LOCATIONS[0]);
+const SearchBar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { jobs, searchKeyword, searchLocation } = useSelector((state) => state.jobs);
+
+  const [keyword, setKeyword] = useState(searchKeyword);
+  const [location, setLocation] = useState(searchLocation);
+
+  useEffect(() => {
+    if (jobs.length === 0) dispatch(fetchJobs());
+  }, [dispatch, jobs.length]);
+
+  const locations = [...new Set(jobs.map((j) => j.location).filter(Boolean))];
 
   const handleSearch = () => {
-    if (onSearch) {
-      onSearch({ keyword: keyword.trim(), location });
-    }
+    dispatch(setSearchFilter({ keyword: keyword.trim(), location }));
+    navigate('/browse-jobs');
   };
 
   const handleKeyDown = (e) => {
@@ -79,7 +82,8 @@ const SearchBar = ({ onSearch }) => {
           onChange={(e) => setLocation(e.target.value)}
           className="outline-none text-[#25324B] text-sm bg-transparent cursor-pointer"
         >
-          {LOCATIONS.map((loc) => (
+          <option value="">All Locations</option>
+          {locations.map((loc) => (
             <option key={loc} value={loc}>
               {loc}
             </option>

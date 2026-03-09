@@ -169,11 +169,11 @@ const SkeletonCard = () => (
 /* ─── Main Page ─── */
 const BrowseJobsPage = () => {
   const dispatch = useDispatch();
-  const { jobs, loading, error } = useSelector((s) => s.jobs);
+  const { jobs, loading, error, searchKeyword, searchLocation } = useSelector((s) => s.jobs);
 
-  const [search,   setSearch]   = useState('');
+  const [search,   setSearch]   = useState(searchKeyword);
   const [category, setCategory] = useState('');
-  const [location, setLocation] = useState('');
+  const [location, setLocation] = useState(searchLocation);
 
   useEffect(() => {
     dispatch(fetchJobs());

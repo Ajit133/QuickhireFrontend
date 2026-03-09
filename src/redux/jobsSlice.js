@@ -26,9 +26,16 @@ const jobsSlice = createSlice({
     error: null,
     adding: false,
     deleting: null,
+    searchKeyword: "",
+    searchLocation: "",
   },
 
-  reducers: {},
+  reducers: {
+    setSearchFilter(state, action) {
+      state.searchKeyword = action.payload.keyword ?? state.searchKeyword;
+      state.searchLocation = action.payload.location ?? state.searchLocation;
+    },
+  },
 
   extraReducers: (builder) => {
     builder
@@ -75,4 +82,5 @@ const jobsSlice = createSlice({
   },
 });
 
+export const { setSearchFilter } = jobsSlice.actions;
 export default jobsSlice.reducer;
