@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchJobs, addJob, deleteJob } from '../redux/jobsSlice';
+import { fetchJobs, addJob, deleteJob } from '../store/jobsSlice';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 

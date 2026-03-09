@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { fetchJobs, setSearchFilter } from '../../redux/jobsSlice';
+import { fetchJobs, setSearchFilter } from '../../store/jobsSlice';
 import Button from '../common/Button';
 
 const SearchIcon = () => (

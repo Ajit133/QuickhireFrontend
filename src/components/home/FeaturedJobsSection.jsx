@@ -1,102 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchJobs } from '../../redux/jobsSlice';
-
-const TAG_STYLES = {
-  'full-time':   'bg-[#E9F9F3] text-[#56CDAD] border border-[#56CDAD]',
-  'part-time':   'bg-[#FFF5E5] text-[#FFB836] border border-[#FFB836]',
-  'contract':    'bg-[#F0F0FF] text-[#4640DE] border border-[#4640DE]',
-  'remote':      'bg-[#FFF0EE] text-[#FF6550] border border-[#FF6550]',
-  'internship':  'bg-[#E8F9F9] text-[#26A4FF] border border-[#26A4FF]',
-  'marketing':   'bg-[#FFF0E8] text-[#FF9500] border border-[#FF9500]',
-  'design':      'bg-[#E8F9F3] text-[#56CDAD] border border-[#56CDAD]',
-  'business':    'bg-[#F0ECFF] text-[#7B61FF] border border-[#7B61FF]',
-  'technology':  'bg-[#FFEEEC] text-[#FF6550] border border-[#FF6550]',
-};
-
-const tagClass = (tag = '') =>
-  TAG_STYLES[tag.toLowerCase()] ?? 'bg-[#F8F8FD] text-[#515B6F] border border-[#D6DDEB]';
-
-const CompanyAvatar = ({ name = '' }) => {
-  const initials = name
-    .split(' ')
-    .slice(0, 2)
-    .map((w) => w[0]?.toUpperCase() ?? '')
-    .join('');
-  const colours = ['#4640DE', '#56CDAD', '#FFB836', '#FF6550', '#26A4FF', '#00BFA5', '#1B3C87'];
-  const bg = colours[(name.charCodeAt(0) ?? 0) % colours.length];
-  return (
-    <div
-      className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm shrink-0"
-      style={{ backgroundColor: bg }}
-    >
-      {initials || '?'}
-    </div>
-  );
-};
-
-const JobCard = ({ job }) => {
-  const title       = job.title        ?? job.job_title        ?? 'Untitled Position';
-  const company     = job.company      ?? job.company_name     ?? 'Unknown Company';
-  const location    = job.location     ?? job.city             ?? '—';
-  const jobType     = job.job_type     ?? job.type             ?? job.employment_type ?? '';
-  const category    = job.category     ?? job.department       ?? '';
-  const description = job.description  ?? job.summary          ?? '';
-  const jobId       = job.id           ?? job._id;
-
-  const tags = [jobType, category].filter(Boolean);
-
-  return (
-    <Link
-      to={`/jobs/${jobId}`}
-      className="bg-white rounded-xl border border-[#D6DDEB] p-6 flex flex-col gap-4 hover:shadow-md transition-shadow duration-200 no-underline"
-    >
-      {/* Top row: avatar + type badge */}
-      <div className="flex items-start justify-between">
-        <CompanyAvatar name={company} />
-        {jobType && (
-          <span className="text-xs font-semibold text-[#4640DE] border border-[#4640DE] rounded px-3 py-1">
-            {jobType}
-          </span>
-        )}
-      </div>
-
-      {/* Title & company / location */}
-      <div>
-        <h3 className="text-base font-semibold text-[#25324B]">{title}</h3>
-        <p className="text-sm text-[#515B6F] mt-0.5">
-          {company}
-          {location && (
-            <>
-              <span className="mx-1.5 text-[#D6DDEB]">•</span>
-              {location}
-            </>
-          )}
-        </p>
-      </div>
-
-      {/* Description */}
-      {description && (
-        <p className="text-sm text-[#7C8493] leading-relaxed line-clamp-2">{description}</p>
-      )}
-
-      {/* Tags */}
-      {tags.length > 0 && (
-        <div className="flex flex-wrap gap-2 mt-auto pt-1">
-          {tags.map((tag) => (
-            <span
-              key={tag}
-              className={`text-xs font-semibold px-3 py-1 rounded-full ${tagClass(tag)}`}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      )}
-    </Link>
-  );
-};
+import { fetchJobs } from '../../store/jobsSlice';
+import FeaturedJobCard from '../jobs/FeaturedJobCard';
 
 const FeaturedJobsSection = () => {
   const dispatch = useDispatch();
@@ -158,7 +64,7 @@ const FeaturedJobsSection = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {featuredJobs.map((job) => (
-              <JobCard key={job.id ?? job._id} job={job} />
+              <FeaturedJobCard key={job.id ?? job._id} job={job} />
             ))}
           </div>
         )}
