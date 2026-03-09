@@ -25,10 +25,10 @@ const WavyUnderline = () => (
 const HeroSection = () => {
   return (
     <section className="relative bg-[#F8F8FD] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-12 lg:py-20 flex flex-col lg:flex-row items-center gap-12 lg:gap-0">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-10 sm:py-12 lg:py-20 flex flex-col lg:flex-row items-center gap-8 sm:gap-10 lg:gap-0">
         {/* ── Left: copy + search ── */}
-        <div className="flex-1 max-w-xl z-10">
-          <h1 className="text-4xl lg:text-5xl font-bold text-[#25324B] leading-snug">
+        <div className="flex-1 max-w-xl z-10 w-full">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#25324B] leading-snug">
             Discover more than
             <span className="block text-[#26A4FF]">
               5000+ Jobs
@@ -36,11 +36,11 @@ const HeroSection = () => {
             </span>
           </h1>
 
-          <p className="mt-5 text-[#515B6F] text-base leading-relaxed max-w-md">
+          <p className="mt-4 sm:mt-5 text-sm sm:text-base text-[#515B6F] leading-relaxed max-w-md">
             Great platform for the job seeker that searching for new career heights and passionate about startups.
           </p>
 
-          <div className="mt-8">
+          <div className="mt-6 sm:mt-8">
             <SearchBar />
           </div>
 
@@ -61,7 +61,7 @@ const HeroSection = () => {
         </div>
 
         {/* ── Right: hero image + decorative pattern ── */}
-        <div className="flex-1 relative flex justify-end items-end overflow-hidden min-h-90 lg:min-h-130">
+        <div className="hidden lg:flex flex-1 relative justify-center lg:justify-end items-end overflow-hidden w-full min-h-56 sm:min-h-80 lg:min-h-130">
           {/* Background geometric pattern */}
           <img
             src={patternImg}
@@ -73,7 +73,7 @@ const HeroSection = () => {
           <img
             src={picImg}
             alt="Smiling job seeker"
-            className="relative z-10 h-full max-h-130 w-auto object-contain object-bottom"
+            className="relative z-10 h-full max-h-56 sm:max-h-96 lg:max-h-130 w-auto object-contain object-bottom"
           />
         </div>
       </div>

@@ -60,9 +60,9 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="flex items-stretch bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
+    <div className="flex flex-col md:flex-row items-stretch bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
       {/* Keyword input */}
-      <div className="flex items-center gap-2.5 px-4 py-3.5 flex-1 border-r border-gray-200 min-w-0">
+      <div className="flex items-center gap-2.5 px-4 py-3.5 flex-1 border-b md:border-b-0 md:border-r border-gray-200 min-w-0">
         <SearchIcon />
         <input
           type="text"
@@ -75,12 +75,12 @@ const SearchBar = () => {
       </div>
 
       {/* Location dropdown */}
-      <div className="flex items-center gap-2.5 px-4 py-3.5">
+      <div className="flex items-center gap-2.5 px-4 py-3.5 border-b md:border-b-0">
         <LocationIcon />
         <select
           value={location}
           onChange={(e) => setLocation(e.target.value)}
-          className="outline-none text-[#25324B] text-sm bg-transparent cursor-pointer"
+          className="outline-none text-[#25324B] text-sm bg-transparent cursor-pointer w-full"
         >
           <option value="">All Locations</option>
           {locations.map((loc) => (
@@ -95,7 +95,7 @@ const SearchBar = () => {
       <Button
         variant="primary"
         onClick={handleSearch}
-        className="px-7 py-3.5 rounded-none text-sm whitespace-nowrap"
+        className="px-7 py-3.5 rounded-none text-sm whitespace-nowrap w-full md:w-auto"
       >
         Search my job
       </Button>
