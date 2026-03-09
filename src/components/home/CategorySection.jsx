@@ -93,16 +93,16 @@ const CategorySection = () => {
   }));
 
   return (
-    <section className="max-w-7xl mx-auto px-6 lg:px-10 py-14">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-10 sm:py-14">
       {/* Header */}
-      <div className="flex items-center justify-between mb-10">
-        <h2 className="text-3xl lg:text-4xl font-bold text-[#25324B]">
+      <div className="flex items-center justify-between mb-6 sm:mb-10">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#25324B]">
           Explore by{' '}
           <span className="text-[#26A4FF]">category</span>
         </h2>
         <Link
           to="/browse-jobs"
-          className="flex items-center gap-2 text-[#4640DE] font-semibold text-sm hover:underline"
+          className="hidden sm:flex items-center gap-2 text-[#4640DE] font-semibold text-sm hover:underline"
         >
           Show all jobs
           <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-4 h-4">
@@ -112,18 +112,18 @@ const CategorySection = () => {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {categories.map((cat, index) => (
           <button
             key={cat.name}
-            className={`group flex flex-col gap-4 p-6 border rounded-sm text-left transition-colors duration-200
+            className={`group flex flex-row sm:flex-col items-center sm:items-start gap-4 p-4 sm:p-6 border rounded-sm text-left transition-colors duration-200
               ${index === 0
                 ? 'bg-[#4640DE] border-[#4640DE] text-white'
                 : 'bg-white border-[#D6DDEB] text-[#25324B] hover:bg-[#4640DE] hover:border-[#4640DE] hover:text-white'
               }`}
           >
             <span
-              className={`transition-colors duration-200
+              className={`shrink-0 transition-colors duration-200
                 ${index === 0
                   ? 'text-white'
                   : 'text-[#4640DE] group-hover:text-white'
@@ -132,23 +132,36 @@ const CategorySection = () => {
               {cat.icon}
             </span>
 
-            <div>
-              <p className="font-bold text-lg leading-tight">{cat.name}</p>
+            <div className="flex-1 min-w-0">
+              <p className="font-bold text-base sm:text-lg leading-tight">{cat.name}</p>
               <p
-                className={`text-sm mt-1 flex items-center gap-1 transition-colors duration-200
+                className={`text-sm mt-0.5 sm:mt-1 flex items-center gap-1 transition-colors duration-200
                   ${index === 0
                     ? 'text-white/80'
                     : 'text-[#515B6F] group-hover:text-white/80'
                   }`}
               >
                 {cat.jobs} jobs available
-                <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5">
+                <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 shrink-0">
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </p>
             </div>
           </button>
         ))}
+      </div>
+
+      {/* Show all jobs — mobile only, below the grid */}
+      <div className="flex sm:hidden justify-start mt-6">
+        <Link
+          to="/browse-jobs"
+          className="flex items-center gap-2 text-[#4640DE] font-semibold text-sm hover:underline"
+        >
+          Show all jobs
+          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-4 h-4">
+            <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </Link>
       </div>
     </section>
   );
