@@ -35,7 +35,7 @@ const LatestJobsSection = () => {
           </h2>
           <Link
              to="/browse-jobs"
-            className="flex items-center gap-2 text-sm font-semibold text-[#4640DE] hover:underline"
+            className="hidden sm:flex items-center gap-2 text-sm font-semibold text-[#4640DE] hover:underline"
           >
             Show all jobs
             <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-4 h-4">
@@ -72,11 +72,24 @@ const LatestJobsSection = () => {
         )}
 
         {!loading && !error && latestJobs.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {latestJobs.map((job) => (
-              <LatestJobCard key={job.id ?? job._id} job={job} />
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {latestJobs.map((job) => (
+                <LatestJobCard key={job.id ?? job._id} job={job} />
+              ))}
+            </div>
+            <div className="flex sm:hidden justify-center mt-6">
+              <Link
+                to="/browse-jobs"
+                className="flex items-center gap-2 text-sm font-semibold text-[#4640DE] hover:underline"
+              >
+                Show all jobs
+                <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-4 h-4">
+                  <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </Link>
+            </div>
+          </>
         )}
       </div>
     </section>
