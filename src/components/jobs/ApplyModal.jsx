@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { applyJob } from '../../store/applicationSlice';
+import { applyJob, resetApplication } from '../../store/applicationSlice';
 
 const inputClass =
   'w-full border border-[#D6DDEB] rounded-xl px-4 py-2.5 text-sm text-[#25324B] placeholder-[#A8B0C0] outline-none focus:border-[#4640DE] transition-colors duration-200 bg-white';
@@ -16,10 +16,15 @@ const FormField = ({ label, required, children }) => (
 
 const ApplyModal = ({ job, onClose }) => {
   const dispatch = useDispatch();
-  const { loading, success } = useSelector((s) => s.application);
+  const { loading, success, error } = useSelector((s) => s.application);
 
-  const [form, setForm] = useState({ name: '', email: '', resume_url: '', cover_note: '' });
+  const [form, setForm] = useState({ name: '', email: '', resume_link: '', cover_note: '' });
   const [errors, setErrors] = useState({});
+
+  // Reset Redux state when modal opens so stale success/error is cleared
+  useEffect(() => {
+    dispatch(resetApplication());
+  }, [dispatch]);
 
   const jobId    = job?.id ?? job?._id;
   const jobTitle = job?.title ?? job?.job_title ?? 'this position';
@@ -30,10 +35,16 @@ const ApplyModal = ({ job, onClose }) => {
     if (!form.name.trim())       e.name       = 'Name is required';
     if (!form.email.trim())      e.email      = 'Email is required';
     else if (!/\S+@\S+\.\S+/.test(form.email)) e.email = 'Enter a valid email';
-    if (!form.resume_url.trim()) e.resume_url = 'Resume link is required';
-    else {
-      try { new URL(form.resume_url); }
-      catch { e.resume_url = 'Enter a valid URL'; }
+    if (!form.resume_link.trim()) {
+      e.resume_link = 'Resume link is required';
+    } else {
+      const raw = form.resume_link.trim();
+      const withProtocol = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
+      try {
+        new URL(withProtocol);
+      } catch (_) {
+        e.resume_link = 'Enter a valid URL (e.g. https://drive.google.com/…)';
+      }
     }
     return e;
   };
@@ -48,7 +59,10 @@ const ApplyModal = ({ job, onClose }) => {
     e.preventDefault();
     const e2 = validate();
     if (Object.keys(e2).length) { setErrors(e2); return; }
-    dispatch(applyJob({ ...form, job_id: jobId }));
+    const resume = /^https?:\/\//i.test(form.resume_link.trim())
+      ? form.resume_link.trim()
+      : `https://${form.resume_link.trim()}`;
+    dispatch(applyJob({ ...form, resume_link: resume, job_id: jobId }));
   };
 
   const handleBackdrop = (e) => { if (e.target === e.currentTarget) onClose(); };
@@ -125,13 +139,13 @@ const ApplyModal = ({ job, onClose }) => {
             <FormField label="Resume Link (URL)" required>
               <input
                 type="url"
-                name="resume_url"
-                value={form.resume_url}
+                name="resume_link"
+                value={form.resume_link}
                 onChange={handleChange}
                 placeholder="https://drive.google.com/your-resume"
-                className={`${inputClass} ${errors.resume_url ? 'border-[#FF6550]' : ''}`}
+                className={`${inputClass} ${errors.resume_link ? 'border-[#FF6550]' : ''}`}
               />
-              {errors.resume_url && <p className="text-xs text-[#FF6550]">{errors.resume_url}</p>}
+              {errors.resume_link && <p className="text-xs text-[#FF6550]">{errors.resume_link}</p>}
             </FormField>
 
             <FormField label="Cover Note">
@@ -144,6 +158,12 @@ const ApplyModal = ({ job, onClose }) => {
                 className={`${inputClass} resize-none`}
               />
             </FormField>
+
+            {error && (
+              <p className="text-sm text-[#FF6550] bg-[#FFF0EE] border border-[#FF6550]/30 rounded-lg px-4 py-2.5">
+                {error}
+              </p>
+            )}
 
             <button
               type="submit"
