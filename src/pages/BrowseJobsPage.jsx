@@ -1,5 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchJobs } from '../redux/jobsSlice';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
@@ -46,11 +47,12 @@ const JobCard = ({ job }) => {
   const location = job.location     ?? job.city ?? '—';
   const category = job.category     ?? job.department ?? '';
   const jobType  = job.job_type     ?? job.type ?? job.employment_type ?? '';
+  const jobId    = job.id           ?? job._id;
 
   const tags = [jobType, category].filter(Boolean);
 
   return (
-    <div className="bg-white rounded-2xl p-5 flex items-start gap-4 shadow-sm hover:shadow-md transition-all duration-200 border border-transparent hover:border-[#4640DE]/20 cursor-pointer group">
+    <Link to={`/jobs/${jobId}`} className="bg-white rounded-2xl p-5 flex items-start gap-4 shadow-sm hover:shadow-md transition-all duration-200 border border-transparent hover:border-[#4640DE]/20 cursor-pointer group no-underline">
       <CompanyAvatar name={company} />
 
       <div className="flex-1 min-w-0">
@@ -84,7 +86,7 @@ const JobCard = ({ job }) => {
           </div>
         )}
       </div>
-    </div>
+    </Link>
   );
 };
 
