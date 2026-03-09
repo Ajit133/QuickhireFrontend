@@ -112,7 +112,7 @@ const LatestJobsSection = () => {
             Latest <span className="text-[#26A4FF]">jobs open</span>
           </h2>
           <Link
-            to="/browse"
+             to="/browse-jobs"
             className="flex items-center gap-2 text-sm font-semibold text-[#4640DE] hover:underline"
           >
             Show all jobs
