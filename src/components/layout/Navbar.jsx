@@ -17,7 +17,7 @@ const Navbar = () => {
             </li>
             <li>
               <Link to="/browse-jobs" className="text-[#515B6F] font-medium hover:text-[#4640DE] transition-colors duration-200 no-underline">
-                Browse Companies
+                Browse Jobs
               </Link>
             </li>
           </ul>
