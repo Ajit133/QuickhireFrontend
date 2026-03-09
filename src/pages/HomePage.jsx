@@ -5,6 +5,7 @@ import CategorySection from '../components/home/CategorySection';
 import PostJobBannerSection from '../components/home/PostJobBannerSection';
 import FeaturedJobsSection from '../components/home/FeaturedJobsSection';
 import LatestJobsSection from '../components/home/LatestJobsSection';
+import Footer from '../components/layout/Footer';
 
 const HomePage = () => {
   return (
@@ -18,6 +19,7 @@ const HomePage = () => {
         <FeaturedJobsSection />
         <LatestJobsSection />
       </main>
+      <Footer />
     </div>
   );
 };

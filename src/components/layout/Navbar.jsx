@@ -1,10 +1,6 @@
+import { Link } from 'react-router-dom';
 import Logo from '../common/Logo';
 import Button from '../common/Button';
-
-const NAV_LINKS = [
-  { label: 'Find Jobs', href: '#' },
-  { label: 'Browse Companies', href: '#' },
-];
 
 const Navbar = () => {
   return (
@@ -14,16 +10,16 @@ const Navbar = () => {
         <div className="flex items-center gap-10">
           <Logo />
           <ul className="hidden md:flex items-center gap-8 list-none m-0 p-0">
-            {NAV_LINKS.map(({ label, href }) => (
-              <li key={label}>
-                <a
-                  href={href}
-                  className="text-[#515B6F] font-medium hover:text-[#4640DE] transition-colors duration-200 no-underline"
-                >
-                  {label}
-                </a>
-              </li>
-            ))}
+            <li>
+              <a href="#" className="text-[#515B6F] font-medium hover:text-[#4640DE] transition-colors duration-200 no-underline">
+                Find Jobs
+              </a>
+            </li>
+            <li>
+              <Link to="/browse-jobs" className="text-[#515B6F] font-medium hover:text-[#4640DE] transition-colors duration-200 no-underline">
+                Browse Companies
+              </Link>
+            </li>
           </ul>
         </div>
 
